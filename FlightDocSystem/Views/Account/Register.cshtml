@@ -32,7 +32,7 @@
     <div class="form-group">
         <div class="col-md-2 control-label">Role Name</div>
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), "Select role",new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

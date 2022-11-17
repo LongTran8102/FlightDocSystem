@@ -35,11 +35,14 @@ namespace FlightDocSystem.Controllers
             }
         }
         // GET: Role
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             List<RoleViewModel> list = new List<RoleViewModel>();
             foreach (var role in RoleManager.Roles)
+            {
                 list.Add(new RoleViewModel(role));
+            }
             return View(list);
         }
 
@@ -65,9 +68,17 @@ namespace FlightDocSystem.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(RoleViewModel model)
         {
-            var role = new ApplicationRole() { Name = model.Name };
-            await RoleManager.UpdateAsync(role);
-            return RedirectToAction("Index");
+            var role = new ApplicationRole() { Id = model.Id, Name = model.Name };
+
+            if (await RoleManager.FindByNameAsync(model.Name) != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                await RoleManager.UpdateAsync(role);
+                return RedirectToAction("Index");
+            }
         }
 
         public async Task<ActionResult> Details(string id)

@@ -34,5 +34,8 @@ namespace FlightDocSystem.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<FlightDocSystem.Models.Flight> Flights { get; set; }
+
+        public System.Data.Entity.DbSet<FlightDocSystem.Models.Document> Documents { get; set; }
     }
 }

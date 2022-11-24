@@ -3,42 +3,77 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>Flight Document System</title>
 
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Public/css/Layout.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("head", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Flight Docs System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <section class="clearfix navbar-fixed-top header bg-white">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg bg-white">
+                <div class="container-fluid">
+                    <a class="navbar-brand" style="color:red;" href="@Url.Action("Index", "Home")">Flight Docs System</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Index", "Home")">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Index", "Role")">Role</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Index", "Flights")">All Flights</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Index", "Documents")">Documents</a>
+                            </li>
+                        </ul>
+                        @using Microsoft.AspNet.Identity
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+                                <ul class="nav navbar-nav navbar-right me-auto mb-2 mb-lg-0">
+                                    <li>
+                                        <a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Index", "Manage")">Hello @User.Identity.GetUserName()!</a>
+                                    </li>
+                                    <li><a class="nav-link active" style="color:red;" aria-current="page" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                </ul>
+                            }
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right ">
+                                <li><a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Login", "Account")">Log in</a></li>
+                                <li><a class="nav-link active" style="color:red;" aria-current="page" href="@Url.Action("Register", "Account")">Register</a></li>
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <section class="clearfix maincontent">
+        <div class="container-fluid">
+            @RenderBody()
+
+        </div>
+    </section>
+    <section class="clearfix footer bg-white fixed-bottom t">
+        <div class="container-fluid text-center py-3 " style="color:red">
+            &copy; @DateTime.Now.Year - Designed by Trần Phan Phi Long
+        </div>
+    </section>
+    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

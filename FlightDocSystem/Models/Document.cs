@@ -13,7 +13,7 @@ namespace FlightDocSystem.Models
 
         [Key]
         public int Id { get; set; }
-        [Required]
+       
         public string DocName { get; set; }
         [Required]
         public int Version { get; set; }
@@ -25,6 +25,7 @@ namespace FlightDocSystem.Models
         public DateTime CreatedDate { get; set; }
         public string Creator { get; set; }
         public string Note { get; set; }
+        public HttpPostedFileBase ImgUpload { get; set; }
 
     }
 }

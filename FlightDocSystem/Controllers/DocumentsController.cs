@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,9 +20,9 @@ namespace FlightDocSystem.Controllers
         {
             return View(db.Documents.ToList());
         }
-
-        // GET: Documents/Details/5
-        public ActionResult Details(int? id)
+       
+            // GET: Documents/Details/5
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {

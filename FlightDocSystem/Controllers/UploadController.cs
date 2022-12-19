@@ -39,5 +39,9 @@ namespace FlightDocSystem.Controllers
                 return View();
             }
         }
+        public ActionResult Delete()
+        {
+            return View();
+        }
     }
 }
